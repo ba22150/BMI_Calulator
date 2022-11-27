@@ -31,7 +31,7 @@ class LoginMain : Activity() {
             val pass: String = pwdL.text.toString()
 
             if (user.equals("")){
-                showToast("Please Enter Usernameeeee")
+                showToast("Please Enter Us")
             }
             else if (pass.equals("")){
                 showToast("Please Enter Password")
