@@ -58,17 +58,25 @@ class UserDBHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null, DB_
         return user
     }
 
+    fun doesUseralreadyexist(email:String): Boolean{
+
+        var u: User= readUser(email)
+
+        return !(u.name.equals("") && u.password.equals(""))
+
+    }
+
 
     companion object {
-        val DB_VERSION= 2
+        val DB_VERSION=3
         val DB_NAME="BMIDatabase.db"
 
         private val SQL_CREATE_ENTRIES=
             "CREATE TABLE " + DBDetails.UserInfo.TABLE+ " (" +
-                    DBDetails.UserInfo.COLUMN_EMAIL+ "TEXT PRIMARY KEY,"+
-                    DBDetails.UserInfo.COLUMN_USER_NAME+ "TEXT," +
-                    DBDetails.UserInfo.COLUMN_PASSWORD+"TEXT)"
+                    DBDetails.UserInfo.COLUMN_EMAIL+"  TEXT PRIMARY KEY,"+
+                    DBDetails.UserInfo.COLUMN_USER_NAME+ " TEXT," +
+                    DBDetails.UserInfo.COLUMN_PASSWORD+" TEXT)"
 
-        private val TABLE_ENTRY ="DROP TABLE IF EXISTS" + DBDetails.UserInfo.TABLE
+        private val TABLE_ENTRY ="DROP TABLE IF EXISTS " + DBDetails.UserInfo.TABLE
     }
 }

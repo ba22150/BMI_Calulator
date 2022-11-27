@@ -28,6 +28,8 @@ class Register : Activity() {
             val pwd : String = pwdR.text.toString()
             val rpwd : String = retypePwd.text.toString()
 
+
+
             if (ur.equals("")){
 //                showToast("Please enter an username", false)
             }
@@ -54,25 +56,21 @@ class Register : Activity() {
                 showToast("Invalid password " ,false)
                 showToast("Password should be at least 6 characters long and have at least one number and one special character" ,true)
             }
+            else if (userDBHelper.doesUseralreadyexist(mail)){
+                showToast("Email already exist ,Please try another again", false)
+            }
+
             else {
-
-                val user1: User = User(ur, mail, pwd)
-
-                val user2: User= userDBHelper.readUser("bibin@gmail.com")
-                val ifAdded: Boolean=userDBHelper.addUser(user1)
-                val user3: User= userDBHelper.readUser("bibin@gmail.com")
-
-
-                if (!ifAdded) {
-                    showToast(" $mail already registered ,Please try again" , false)
-                }
-                else {
+                var userAdd : User= User(ur,mail,pwd)
+                var hasUserbeenAdded: Boolean=userDBHelper.addUser(userAdd)
+                if(hasUserbeenAdded) {
                     finish()
 
                     val intent: Intent = Intent(this, BMICalculator::class.java)
                     startActivity(intent)
-
                 }
+
+
 
 
 
@@ -87,6 +85,7 @@ class Register : Activity() {
 
 
     }
+
 
     fun showToast (t:String , isLong: Boolean){
         var toastLength = Toast.LENGTH_SHORT

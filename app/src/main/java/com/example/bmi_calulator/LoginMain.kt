@@ -5,47 +5,47 @@ import android.app.Activity
 import android.content.Intent
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
 import android.widget.Toast
-import android.content.Context
-import android.graphics.Canvas
-import android.graphics.Color
-import android.graphics.Paint
-import android.view.View
 
 
 class LoginMain : Activity() {
+    lateinit var userDBHelper: UserDBHelper
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.login_main)
         val loginB: Button = findViewById(R.id.login)
         val signupB: Button = findViewById(R.id.signup)
+        userDBHelper= UserDBHelper(this)  // initialising class to variable
+
 
 
 
         loginB.setOnClickListener {
             val userL: EditText = findViewById(R.id.usernameL)
             val pwdL: EditText = findViewById(R.id.passwordL)
-            val user: String = userL.text.toString()
+            val email: String = userL.text.toString()
             val pass: String = pwdL.text.toString()
 
-            if (user.equals("")){
+
+            if (email.equals("")){
                 showToast("Please Enter Username")
             }
             else if (pass.equals("")){
                 showToast("Please Enter Password")
             }
+            else if (!userDBHelper.doesUseralreadyexist(email)){        //checking if email already in database
+                showToast("Email not registered ,Please Sign Up")
+            }
+
             else {
-                val loguser : String = RegController.loginUser (user,pass)
-                if (loguser.equals("Wrong Password")){
-                    showToast("Incorrect password .Please try again")
-                }
-                else if (loguser.equals("Unsuccessful")){
-                    showToast("Invalid email ID")
+
+                val loguser : User = userDBHelper.readUser(email)
+                if (!loguser.password.equals(pass)){                           //checking if the password is correct
+                    showToast("Incorrect password,Please try again")
                 }
                 else{
-                    val intent: Intent = Intent(this, BMICalculator::class.java)
+                    val intent: Intent = Intent(this, BMICalculator::class.java)    // landing to next Page
                     startActivity(intent)
                 }
             }
