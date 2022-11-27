@@ -20,15 +20,9 @@ class RegController {
 
         fun regUser (regUser : User) : Boolean {
 
-            val regEmail : String = regUser.email
-            val len: Int = allUsers.size
-            for (i in 0..len-1){
-                if(regEmail.equals(allUsers.get(i).email)){
-                    return false
-                }
 
-            }
-            addUser(regUser)
+
+
             return true
 
         }

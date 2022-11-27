@@ -9,9 +9,13 @@ import android.widget.Toast
 
 class Register : Activity() {
 
+    lateinit var userDBHelper: UserDBHelper
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.register_main)
+        userDBHelper= UserDBHelper(this)
+
         val signIn: Button = findViewById(R.id.signinR)
 
         signIn.setOnClickListener {
@@ -54,11 +58,13 @@ class Register : Activity() {
 
                 val user1: User = User(ur, mail, pwd)
 
-                val isUserAdded: Boolean = RegController.regUser(user1)
-                val testmail : String = user1.email
+                val user2: User= userDBHelper.readUser("bibin@gmail.com")
+                val ifAdded: Boolean=userDBHelper.addUser(user1)
+                val user3: User= userDBHelper.readUser("bibin@gmail.com")
 
-                if (!isUserAdded) {
-                    showToast(" $testmail already registered ,Please try again" , false)
+
+                if (!ifAdded) {
+                    showToast(" $mail already registered ,Please try again" , false)
                 }
                 else {
                     finish()
