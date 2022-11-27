@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">BMI_Calulator</string>
+    <string name="result_overweight">\"You are overweight . But Don\'t worry ,with proper diet and exercise your BMI can be improved \"</string>
+    <string name="weight_perfect">\"Congratulations !! You are have a healthy BMI . \"</string>
+    <string name="underweight">\"You are underweight . But Don\'t worry ,with proper diet and exercise your BMI can be improved \"</string>
+    <string name="obese">\" You are Obese .But Don\'t worry ,with proper diet and exercise your BMI can be improved\"</string>
+</resources>
