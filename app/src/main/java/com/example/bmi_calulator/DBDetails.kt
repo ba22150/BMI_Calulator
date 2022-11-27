@@ -15,6 +15,17 @@ class DBDetails {
             const val COLUMN_PASSWORD="password"
         }
     }
+    class BMIInfo: BaseColumns{
+        companion object{
+            const val BMITABLE="bmiTable"
+            const val COLUMN_DATE="date"
+            const val COLUMN_EMAIL="email_id"
+            const val COLUMN_HEIGHT="user_height"
+            const val COLUMN_WEIGHT="user_weight"
+            const val COLUMN_BMI="bmi_Result"
+        }
+    }
+
 
 
 

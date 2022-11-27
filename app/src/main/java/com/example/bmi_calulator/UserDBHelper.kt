@@ -14,7 +14,6 @@ class UserDBHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null, DB_
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(SQL_CREATE_ENTRIES)  /* Function to create the table in the Database */
     }
-
     override fun onDowngrade(db: SQLiteDatabase?, oldVersion: Int, newVersion: Int) {
         super.onDowngrade(db, oldVersion, newVersion)
     }
