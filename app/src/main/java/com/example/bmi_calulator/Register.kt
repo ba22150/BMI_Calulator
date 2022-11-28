@@ -64,7 +64,10 @@ class Register : Activity() {
                 var userAdd : User= User(ur,mail,pwd)
                 var hasUserbeenAdded: Boolean=userDBHelper.addUser(userAdd)
                 if(hasUserbeenAdded) {
+                    WhoLoggedIn.userMail=mail
                     finish()
+
+
 
                     val intent: Intent = Intent(this, BMICalculator::class.java)
                     startActivity(intent)

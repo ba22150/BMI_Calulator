@@ -9,7 +9,7 @@ import android.database.sqlite.SQLiteOpenHelper
 import android.os.FileObserver.CREATE
 import android.provider.ContactsContract.CommonDataKinds.Email
 
-class UserDBHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null, DB_VERSION) {
+class UserDBHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null, DBDetails.UserInfo.DB_VERSION) {
 
     override fun onCreate(db: SQLiteDatabase) {
         db.execSQL(SQL_CREATE_ENTRIES)  /* Function to create the table in the Database */
@@ -67,7 +67,6 @@ class UserDBHelper(context: Context): SQLiteOpenHelper(context,DB_NAME,null, DB_
 
 
     companion object {
-        val DB_VERSION=3
         val DB_NAME="BMIDatabase.db"
 
         private val SQL_CREATE_ENTRIES=

@@ -45,6 +45,7 @@ class LoginMain : Activity() {
                     showToast("Incorrect password,Please try again")
                 }
                 else{
+                    WhoLoggedIn.userMail=email
                     val intent: Intent = Intent(this, BMICalculator::class.java)    // landing to next Page
                     startActivity(intent)
                 }

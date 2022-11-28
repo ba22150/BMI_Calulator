@@ -32,7 +32,7 @@
             android:name=".BMICalculator"
             android:label="BMICalculator"/>
         <activity
-            android:name="history"
+            android:name="History"
             android:label="history"/>
 
     </application>

@@ -9,6 +9,7 @@ class DBDetails {
 
     class UserInfo: BaseColumns {
         companion object{
+            const val DB_VERSION =6   // declaring version  (for both tables)
             const val TABLE="userInformation"
             const val COLUMN_USER_NAME="name"
             const val COLUMN_EMAIL="email_id"

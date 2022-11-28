@@ -11,19 +11,25 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import android.widget.Toast
+import java.util.*
+import kotlin.collections.ArrayList
 
 class BMICalculator : Activity() {
+    lateinit var bmiDBHelper: BmiDBHelper
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.bmi_calculate)
         val button : Button = findViewById(R.id.BMIButton)
+        bmiDBHelper=BmiDBHelper(this)
 
         button.setOnClickListener {
             val heightE : EditText = findViewById(R.id.height)
             val weightE : EditText =findViewById(R.id.weight)
             val he = heightE.text .toString()
             val we = weightE.text .toString()
+
             if (he==("")){
                 showToast("Please enter height")
             }
@@ -32,18 +38,19 @@ class BMICalculator : Activity() {
             }
             else {
             doThisWhenButtonClicked()
+
             }
         }
 
         val preBmi : Button = findViewById(R.id.previousBMI)
         preBmi.setOnClickListener {
-            val intent : Intent = Intent (this , history::class.java)
+            val intent : Intent = Intent (this , History::class.java)
             startActivity(intent)
         }
 
         val logout: Button = findViewById(R.id.logoutBMI)
         logout.setOnClickListener {
-
+            WhoLoggedIn.userMail=""
             finish()
 
 
@@ -60,6 +67,13 @@ class BMICalculator : Activity() {
         val resultBMI : TextView = findViewById(R.id.BMIResult)
         val rStatement : TextView = findViewById(R.id.ResultStatement)
         val bmi :Float= calculateBMI( he.toFloat() ,we.toFloat())
+
+
+        var bmiRecord: Bmi= Bmi(Date(),WhoLoggedIn.userMail,he.toFloat(),we.toFloat(),bmi) // Adding the BMI record to the BMI table in BMI database
+        bmiDBHelper.addBMI(bmiRecord)
+        val bmiList: ArrayList<Bmi> = bmiDBHelper.readBMI(WhoLoggedIn.userMail) // reading from the BMI list
+
+
 
         val viewGroup: ViewGroup = findViewById(android.R.id.content)
         val view: View = viewGroup.getRootView()
