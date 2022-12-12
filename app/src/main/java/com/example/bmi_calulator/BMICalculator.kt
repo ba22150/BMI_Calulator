@@ -37,7 +37,7 @@ class BMICalculator : Activity() {
                 showToast("Please enter weight")
             }
             else {
-            doThisWhenButtonClicked()
+                doThisWhenButtonClicked()
 
             }
         }
@@ -84,7 +84,15 @@ class BMICalculator : Activity() {
         resultBMI.text = bmi.toString()
 
         if (bmi<18.5) {
+
+            val underButton: Button = findViewById(R.id.BMIButton)
+            underButton.setOnClickListener {
+                val intent: Intent = Intent(this, UnderBMI::class.java)
+                startActivity(intent)
+            }
+
             rStatement.text = getString(R.string.underweight)
+
         }
         else if (18.5<bmi && bmi <24.9) {
             rStatement.text = getString(R.string.weight_perfect)
@@ -95,6 +103,7 @@ class BMICalculator : Activity() {
         else {
             rStatement.text =getString(R.string.obese)
         }
+
 
 
 
@@ -118,6 +127,14 @@ class BMICalculator : Activity() {
             getSystemService(Context.INPUT_METHOD_SERVICE) as InputMethodManager
         imm.hideSoftInputFromWindow(view.windowToken, 0)
     }
+
+//fun under(bmi: Float) {
+    //val underButton: Button = findViewById(R.id.BMIButton)
+    //underButton.setOnClickListener {
+    // val intent: Intent = Intent(this, UnderBMI::class.java)
+    //startActivity(intent)
+
+    //}
 
 
 }
